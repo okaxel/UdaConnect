@@ -1,0 +1,30 @@
+I. Refactoring REST API service to 2 Microservices
+
+The original UdaConnect application and its backend is quite straightforward but
+it needs a refactoring to resitst high data load. The separation of the location
+and person requests is a good choice becauses they can served in a paralel way.
+The person related services are coupled with the connnection service since
+it would be a great effort to separate them from each other. It can be a great
+future improvement. The related services are implemented with Flask to keep the
+original conception of UdaConnect. This is a good choice, since the frontend
+application can manage it with minor changes or even without any significant
+change.
+
+II. Introducing the use of Kafka
+
+Kafka is a robust and scalable solution to queue messages. Why to use it? The
+queue itself offers 2 advantages simultanously. The first one is that there is
+only a low level of risk to loose messages, the other one is that the system
+can work with messages only in case if it has the needed resources. The messages
+itself are data related requests therefore in fact it handles both the needs of
+the frontend querries and of the database resource limits.
+
+III. Introducing the use of gRPC
+
+The Protobuf technology and gRPC are perfect solutions for backend level
+communication since they have fixed fields and content (variable) types. These
+two factors ensure significant advanatages in the backend communication because
+the data load is slightly smaller then with the JSON format since gRPC transmits
+binary data instead of long textual datapoints. On the other gRPC is not at all
+flexible on the content side, but in this case don't even need it, so gRPC is a
+perfect choice.

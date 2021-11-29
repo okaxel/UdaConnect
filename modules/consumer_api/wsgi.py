@@ -31,8 +31,8 @@ def locationify(location):
     stub = location_pb2_grpc.LocationServiceStub(channel)
     locations = location_pb2.LocationsMessage(person_id=location['person_id'],
                                                creation_time=location['creation_time'],
-                                               coord_lat=location['coord_lat'],
-                                               coord_lang=location['coord_lang'])
+                                               latitude=location['latitude'],
+                                               longitude=location['longitude'])
     stub.Create(locations)
     logger.info('ConsumerApi::locationify(): success.')
 
@@ -58,12 +58,12 @@ db.init_app(app)
 kafka_consumer = KafkaConsumer(KAFKA_TOPIC, bootstrap_servers=[KAFKA_SERVER])
 
 for message in kafka_consumer:
-    json_data = json.loads((message.value.decode('utf-8')))
+    json_data = json.loads(message.value.decode('utf-8'))
     if all(['first_name' in json_data, 'last_name' in json_data,
              'company_name' in json_data]):
         # Person check: strict
         personify(json_data)
-    elif 'coord_lat' in json_data or 'coord_long' in json_data:
+    elif 'latitude' in json_data or 'longitude' in json_data:
         # Location check: lazy
         locationify(d_msg)
     else:

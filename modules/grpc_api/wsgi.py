@@ -36,15 +36,15 @@ class LocationsServicer(location_pb2_grpc.LocationServiceServicer):
         request_value = {
             'person_id': request.person_id,
             'creation_time': request.creation_time,
-            'coord_lat': request.coord_lat,
-            'coord_lang': request.coord_lang,
+            'latitude': request.latitude,
+            'longitude': request.longitude,
         }
         location_data = location_pb2.LocationsMessage(**request_value)
         logger.info('New lcation protobuf object commited to db. Data: {}'.format(location_data))
         location_record = Location()
         location_record.person_id = location_data.person_id
         location_record.creation_time = location_data.creation_time
-        location_record.coordinate = ST_Point(location_data.coord_lat, location_data.coord_lang)
+        location_record.coordinate = ST_Point(location_data.latitude, location_data.longitude)
         with app.app_context():
             db.session.add(location_record)
             db.session.commit()

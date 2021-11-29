@@ -1,0 +1,49 @@
+gRPC documentation
+==================
+
+I. Where to find the code
+
+The code is in ./modules/grpc_api directory.
+
+II. How to pull or deploy
+
+You can pull Docker container from okaxel:udaconnect-grpc-api:latest
+
+You can deploy it with the file ./deployment/udaconnect-grpc-api.yaml directly.
+
+To avoid errors it is recommended to deploy other parts as well especially
+ZooKeeper and Kafka.
+
+III. How to connect
+
+The gRPC serice runs on port 5005 in the localhost. You can copy the direct link
+localhost:5005 from here.
+
+In fact the nodeport is accessible on port 30003 if you deploced it like
+mentioned in the II. part. In this case you can use the link localhost:30003
+simply.
+
+IV. How to send a sample/test message
+
+You can test gRPC server in two ways.
+
+IV.1. The easy way
+
+It is a question of habit which one is the easiest way but I guess to run the
+code drictly is much more easy than using it as a deployed container in
+kubernetes, k3s, k8s or wherever. In case if you select this solution you
+need a convenient environment and two terminals only.
+
+In the first terminal run:
+flask run --host 0.0.0.0
+
+In the second terminal run
+python sample_message.py
+
+IV.2. The hard way
+
+If you want to try the deployed container. You have to step into the container
+and run:
+python sample_message.py
+
+Thats it.

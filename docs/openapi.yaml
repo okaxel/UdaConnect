@@ -1,0 +1,251 @@
+openapi: 3.0.3
+info:
+
+  version: "1.0.0"
+  title: UdaConnect API endpoints - PersonAndConnection, Location
+  description: Endpoints of UdaConnect app backend to manage and retrieve persons, locations and connections
+
+paths:
+  '/api/persons':
+    post:
+      summary: Create a person
+      operationId: CreatePersonResource
+      description: Initiate the creation of a new Person object in the UdaConnect database.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePerson'
+        description: Details of the person to add
+      responses:
+        '201':
+          description: Person created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatePerson'
+        '400':
+          description: Error happen or invalid data received
+    'get':
+      summary: Get full list of person objects
+      operationId: getPersonResources
+      description: Get every person from the databse.
+      responses:
+        '200':
+          description: List of all person registered.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetPersons'
+        '400':
+          description: Error happen or invalid data received
+  '/api/persons/{person_id}':
+    parameters:
+      - in: path
+        description: ID of a given person
+        name: person_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/GetPerson'
+    get:
+      summary: Get a certain person from the databse
+      operationId: getPersonResource
+      description: Get a single person from the backend databse.
+      responses:
+        '200':
+          description: Details of the specific person
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetPersons'
+        '400':
+          description: Error happen or invalid data received
+  '/api/locations':
+    post:
+      summary: Create a Location
+      operationId: CreateLocationResource
+      description: Initiate the creation of a new Location object in the UdaConnect database.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateLocation'
+        description: Details of the location to add
+      responses:
+        '201':
+          description: Location created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateLocation'
+        '400':
+          description: Error happen or invalid data received
+  '/api/locations/{location_id}':
+    parameters:
+      - in: path
+        description: ID of a given location
+        name: location_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/GetLocation'
+    get:
+      summary: Get a certain location from the databse
+      operationId: getLocationResource
+      description: Get a single location from the backend databse.
+      responses:
+        '200':
+          description: Details of the specific location
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetLocation'
+        '400':
+          description: Error happen or invalid data received
+  '/api/persons/{person_id}/connection{start_date}&{end_date}&{distance}':
+    parameters:
+      - in: path
+        description: ID of a given person
+        name: person_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/GetConnection'
+      - in: path
+        description: Data parameter to search from.
+        name: start_date
+        required: true
+        schema:
+          $ref: '#/components/schemas/GetConnection'
+      - in: path
+        description: Data parameter to search till.
+        name: end_date
+        required: true
+        schema:
+          $ref: '#/components/schemas/GetConnection'
+      - in: path
+        description: Distance between the potentially connected locations.
+        name: distance
+        required: true
+        schema:
+          $ref: '#/components/schemas/GetConnection'
+    get:
+      summary: Get a certain connection from the databse
+      operationId: getConnectionResource
+      description: Get a single location from the backend databse.
+      responses:
+        '200':
+          description: Details of connections related to the given person
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetConnection'
+        '400':
+          description: Error happen or invalid data received
+components:
+  schemas:
+    GetPersons:
+      type: object
+      required:
+        - id
+        - first_name
+        - last_name
+        - company_name
+      properties:
+        id:
+          type: string
+          example: "9"
+        first_name:
+          type: string
+          example: 'Axel'
+        last_name:
+          type: string
+          example: 'Orszag-Krisz Dr.'
+        company_name:
+          type: string
+          example: 'Udacity Student'
+    CreatePerson:
+      type: object
+      required:
+        - id
+        - first_name
+        - last_name
+        - company_name
+      properties:
+        id:
+          type: string
+          example: "90"
+        first_name:
+          type: string
+          example: 'John'
+        last_name:
+          type: string
+          example: 'Smith'
+        company_name:
+          type: string
+          example: 'SomeCompany'
+    GetPerson:
+      type: string
+      example: 'Example: /api/persons/3'
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          example: "8"
+    GetConnection:
+      type: string
+      example: 'Example: /api/persons/8/connection?start_date=2020-01-01&end_date=2021-11-28&distance=3'
+      required:
+        - person_id
+        - start_date
+        - end_date
+        - distance
+      properties:
+        person_id:
+          type: string
+          example: "8"
+        start_date:
+          type: string
+          example: '2020-01-01'
+        end_date:
+          type: string
+          example: '2021-11-28'
+        distance:
+          type: string
+          example: "3"
+    CreateLocation:
+      type: object
+      required:
+        - person_id
+        - creation_time
+        - latitude
+        - longitude
+      properties:
+        person_id:
+          type: string
+          example: "11"
+        creation_time:
+          type: string
+          example: '2020-09-11T21:31:54'
+        latitude:
+          type: string
+          example: "47.0000"
+        longitude:
+          type: string
+          example: "19.0000"
+    GetLocation:
+      type: string
+      example: 'Example: /api/locations/3'
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          example: "51"
