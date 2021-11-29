@@ -38,7 +38,7 @@ jobs:
         with:
 
           context: ./modules/location_api
-          file: ./Dockerfile
+          file: ./modules/location_api/Dockerfile
           push: true
           tags: okaxel/udaconnect-location-api:latest
 
@@ -47,7 +47,7 @@ jobs:
         with:
 
           context: ./modules/pac_api
-          file: ./Dockerfile
+          file: ./modules/pac_api/Dockerfile
           push: true
           tags: okaxel/udaconnect-pac-api:latest
 
@@ -56,7 +56,7 @@ jobs:
         with:
 
           context: ./modules/consumer_api
-          file: ./Dockerfile
+          file: ./modules/consumer_api/Dockerfile
           push: true
           tags: okaxel/udaconnect-consumer-api:latest
 
@@ -65,6 +65,6 @@ jobs:
         with:
 
           context: ./modules/grpc_api
-          file: ./Dockerfile
+          file: ./modules/grpc_api/Dockerfile
           push: true
           tags: okaxel/udaconnect-grpc-api:latest
