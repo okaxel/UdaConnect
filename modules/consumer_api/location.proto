@@ -1,0 +1,19 @@
+/*
+ * UdaConnect App Microservice version
+ * ===================================
+ *
+ * Service: ConsumerApi
+ */
+
+syntax = "proto3";
+
+message LocationMessage {
+    int32 person_id = 1;
+    string creation_time = 2;
+    string coord_lat = 3;
+    string coord_long = 4;
+}
+
+service LocationService {
+    rpc Create(LocationMessage) returns (LocationMessage);
+}
