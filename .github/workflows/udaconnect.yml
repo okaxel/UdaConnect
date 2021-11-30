@@ -33,6 +33,15 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
+      - name: Build and push (app frontend)
+        uses: docker/build-push-action@v2
+        with:
+
+          context: ./modules/frontend
+          file: ./modules/frontend/Dockerfile
+          push: true
+          tags: okaxel/udaconnect-app:latest
+
       - name: Build and push (location)
         uses: docker/build-push-action@v2
         with:

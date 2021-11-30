@@ -2,7 +2,7 @@
  * UdaConnect App Microservice version
  * ===================================
  *
- * Service: gRPCApi
+ * Service: ConsumerApi
  */
 
 syntax = "proto3";
