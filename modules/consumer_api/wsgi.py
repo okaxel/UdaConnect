@@ -57,14 +57,15 @@ db.init_app(app)
 
 kafka_consumer = KafkaConsumer(KAFKA_TOPIC, bootstrap_servers=[KAFKA_SERVER])
 
-for message in kafka_consumer:
-    json_data = json.loads(message.value.decode('utf-8'))
-    if all(['first_name' in json_data, 'last_name' in json_data,
-             'company_name' in json_data]):
-        # Person check: strict
-        personify(json_data)
-    elif 'latitude' in json_data or 'longitude' in json_data:
-        # Location check: lazy
-        locationify(d_msg)
-    else:
-        logger.warning('ConsumerApi::mainloop: Invalid JSON data received.')
+while True:
+    for message in kafka_consumer:
+        json_data = json.loads(message.value.decode('utf-8'))
+        if all(['first_name' in json_data, 'last_name' in json_data,
+                 'company_name' in json_data]):
+            # Person check: strict
+            personify(json_data)
+        elif 'latitude' in json_data or 'longitude' in json_data:
+            # Location check: lazy
+            locationify(d_msg)
+        else:
+            logger.warning('ConsumerApi::mainloop: Invalid JSON data received.')
