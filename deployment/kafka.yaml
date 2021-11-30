@@ -7,8 +7,6 @@ metadata:
     service: kafka
 
   name: kafka
-  author: okaxel
-  repository: https://github.com/okaxel/UdaConnect/
 
 spec:
 
@@ -36,8 +34,6 @@ metadata:
     service: kafka
 
   name: kafka
-  author: okaxel
-  repository: https://github.com/okaxel/UdaConnect/
 
 spec:
 

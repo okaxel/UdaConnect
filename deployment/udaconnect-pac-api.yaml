@@ -7,8 +7,6 @@ metadata:
     service: udaconnect-pac-api
 
   name: udaconnect-pac-api
-  author: okaxel
-  repository: https://github.com/okaxel/UdaConnect/
 
 spec:
 
@@ -36,8 +34,6 @@ metadata:
     service: udaconnect-pac-api
 
   name: udaconnect-pac-api
-  author: okaxel
-  repository: https://github.com/okaxel/UdaConnect/
 
 spec:
 

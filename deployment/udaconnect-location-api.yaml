@@ -7,8 +7,6 @@ metadata:
     service: udaconnect-location-api
 
   name: udaconnect-location-api
-  author: okaxel
-  repository: https://github.com/okaxel/UdaConnect/
 
 spec:
 
@@ -36,8 +34,6 @@ metadata:
     service: udaconnect-location-api
 
   name: udaconnect-location-api
-  author: okaxel
-  repository: https://github.com/okaxel/UdaConnect/
 
 spec:
 
